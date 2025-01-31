@@ -173,7 +173,7 @@ public class Clientes extends JFrame {
         iconoUsuario.setBounds(33, 31, 53, 41);
         barraLateral.add(iconoUsuario);
         
-        //nene me come la polla
+    
         
 
         JLabel iconoFactura = new JLabel("");
