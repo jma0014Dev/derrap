@@ -145,7 +145,10 @@ public class Clientes extends JFrame {
         panelClientes.setLayout(null);
         panelClientes.setBounds(160, 79, 1067, 569);
         contentPane.add(panelClientes);
+        
 
+
+        
         // Configuración del modelo y JTable
         modelClientes = new DefaultTableModel();
         modelClientes.addColumn("DNI");
@@ -169,7 +172,28 @@ public class Clientes extends JFrame {
         panelBotones.setLayout(null);
         panelBotones.setBounds(29, 528, 1067, 64);
         panelClientes.add(panelBotones);
+        
+     // Botón "Asignar Vehículo"
+        JButton btnAsignarVehiculo = new JButton("Asignar Vehículo");
+        btnAsignarVehiculo.setBounds(760, 11, 120, 28);  // Ajusta la posición y tamaño según tu layout
+        btnAsignarVehiculo.addActionListener(e -> {
+            int selectedRow = tableClientes.getSelectedRow();
+            if (selectedRow != -1) {
+                // Se obtienen los datos mínimos del cliente seleccionado:
+                int dni = Integer.parseInt(modelClientes.getValueAt(selectedRow, 0).toString());
+                String nombre = modelClientes.getValueAt(selectedRow, 1).toString();
+                String apellido = modelClientes.getValueAt(selectedRow, 2).toString();
+                int currentMatricula = Integer.parseInt(modelClientes.getValueAt(selectedRow, 6).toString());
+                // Se crea un objeto ClienteData para pasar los datos a la ventana de asignación
+                ClienteData cliente = new ClienteData(dni, nombre, apellido, currentMatricula);
+                new AsignarVehiculoFrame(cliente, connection).setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(null, "Seleccione un cliente para asignar un vehículo.");
+            }
+        });
+        panelBotones.add(btnAsignarVehiculo);
 
+        
         // Botón "Actualizar Tabla"
         JButton btnActualizarTabla = new JButton("Actualizar Tabla");
         btnActualizarTabla.setBounds(323, 11, 107, 28);
