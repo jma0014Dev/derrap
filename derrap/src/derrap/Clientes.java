@@ -73,82 +73,16 @@ public class Clientes extends JFrame {
         barraLateral.setLayout(null);
         contentPane.add(barraLateral);
 
-        // Botón para añadir cliente (en barra lateral)
+        
         JButton btnAñadirCliente = new JButton("Añadir cliente");
         btnAñadirCliente.setBounds(0, 83, 111, 23);
         btnAñadirCliente.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // Ventana para agregar un nuevo cliente
-                JFrame formulario = new JFrame("Añadir Cliente");
-                formulario.setSize(400, 400);
-                formulario.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                formulario.getContentPane().setLayout(new GridLayout(7, 2, 5, 5));
-
-                JLabel lblDNI = new JLabel("DNI:");
-                JTextField txtDNI = new JTextField();
-
-                JLabel lblNombre = new JLabel("Nombre:");
-                JTextField txtNombre = new JTextField();
-
-                JLabel lblApellido = new JLabel("Apellido:");
-                JTextField txtApellido = new JTextField();
-
-                JLabel lblEmail = new JLabel("Email:");
-                JTextField txtEmail = new JTextField();
-
-                JLabel lblTelefono = new JLabel("Teléfono:");
-                JTextField txtTelefono = new JTextField();
-
-                JLabel lblDireccion = new JLabel("Dirección:");
-                JTextField txtDireccion = new JTextField();
-
-                JLabel lblVehiculo = new JLabel("Matrícula del Vehículo:");
-                JTextField txtVehiculo = new JTextField();
-
-                JButton btnGuardar = new JButton("Guardar");
-                btnGuardar.addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        try {
-                            String query = "INSERT INTO cliente (dni, Nombre, Apellido, email, Telefono, Direccion, vehiculo_Matricula) VALUES (?, ?, ?, ?, ?, ?, ?)";
-                            PreparedStatement statement = connection.prepareStatement(query);
-                            statement.setInt(1, Integer.parseInt(txtDNI.getText()));
-                            statement.setString(2, txtNombre.getText());
-                            statement.setString(3, txtApellido.getText());
-                            statement.setString(4, txtEmail.getText());
-                            statement.setInt(5, Integer.parseInt(txtTelefono.getText()));
-                            statement.setString(6, txtDireccion.getText());
-                            statement.setInt(7, Integer.parseInt(txtVehiculo.getText()));
-
-                            statement.executeUpdate();
-                            JOptionPane.showMessageDialog(formulario, "Cliente añadido con éxito.");
-                            formulario.dispose();
-                            loadClientData();  // Recargar la tabla con los nuevos datos
-                        } catch (SQLException ex) {
-                            JOptionPane.showMessageDialog(formulario, "Error al añadir cliente: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-                        }
-                    }
-                });
-
-                formulario.getContentPane().add(lblDNI);
-                formulario.getContentPane().add(txtDNI);
-                formulario.getContentPane().add(lblNombre);
-                formulario.getContentPane().add(txtNombre);
-                formulario.getContentPane().add(lblApellido);
-                formulario.getContentPane().add(txtApellido);
-                formulario.getContentPane().add(lblEmail);
-                formulario.getContentPane().add(txtEmail);
-                formulario.getContentPane().add(lblTelefono);
-                formulario.getContentPane().add(txtTelefono);
-                formulario.getContentPane().add(lblDireccion);
-                formulario.getContentPane().add(txtDireccion);
-                formulario.getContentPane().add(lblVehiculo);
-                formulario.getContentPane().add(txtVehiculo);
-                formulario.getContentPane().add(btnGuardar);
-
-                formulario.setVisible(true);
+                new AnadirClienteFrame(connection).setVisible(true);
             }
         });
         barraLateral.add(btnAñadirCliente);
+
 
         // Íconos en la barra lateral (sin modificaciones)
         JLabel iconoUsuario = new JLabel("");
@@ -199,9 +133,16 @@ public class Clientes extends JFrame {
         panelClientes.add(scrollPane, BorderLayout.CENTER);
 
         // Panel inferior para los botones de "Modificar" y "Eliminar"
-        JPanel panelBotones = new JPanel();
-        panelBotones.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 10));
+        JPanel panelBotones = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
+        JButton btnActualizarTabla = new JButton("Actualizar Tabla");
+        btnActualizarTabla.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                loadClientData();  // Método que recarga los datos de la tabla
+            }
+        });
+        panelBotones.add(btnActualizarTabla);
 
+        // Botón para modificar el cliente seleccionado
         JButton btnModificarCliente = new JButton("Modificar Cliente");
         btnModificarCliente.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -212,7 +153,6 @@ public class Clientes extends JFrame {
                     String nombre = modelClientes.getValueAt(selectedRow, 1).toString();
                     String apellido = modelClientes.getValueAt(selectedRow, 2).toString();
                     int matricula = Integer.parseInt(modelClientes.getValueAt(selectedRow, 6).toString());
-                    
                     // Se crea un objeto ClienteData para pasar los datos (se utiliza en la ventana de modificación)
                     ClienteData cliente = new ClienteData(dni, nombre, apellido, matricula);
                     new ModificarClienteFrame(cliente, connection).setVisible(true);
@@ -221,7 +161,9 @@ public class Clientes extends JFrame {
                 }
             }
         });
+        panelBotones.add(btnModificarCliente);
 
+        // Botón para eliminar el cliente seleccionado
         JButton btnEliminarCliente = new JButton("Eliminar Cliente");
         btnEliminarCliente.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -238,7 +180,7 @@ public class Clientes extends JFrame {
                             ps.setInt(2, matricula);
                             ps.executeUpdate();
                             JOptionPane.showMessageDialog(null, "Cliente eliminado con éxito.");
-                            loadClientData(); // Actualizar la tabla
+                            loadClientData(); // Actualizar la tabla después de eliminar
                         } catch (SQLException ex) {
                             JOptionPane.showMessageDialog(null, "Error al eliminar cliente: " + ex.getMessage());
                         }
@@ -248,7 +190,10 @@ public class Clientes extends JFrame {
                 }
             }
         });
+        panelBotones.add(btnEliminarCliente);
 
+        // Se agrega el panel inferior (con los botones) al panel principal que contiene la tabla
+        panelClientes.add(panelBotones, BorderLayout.SOUTH);
         panelBotones.add(btnModificarCliente);
         panelBotones.add(btnEliminarCliente);
         panelClientes.add(panelBotones, BorderLayout.SOUTH);
