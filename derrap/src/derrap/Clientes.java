@@ -58,14 +58,6 @@ public class Clientes extends JFrame {
         
         
 
-        JButton btnVolver = new JButton("<--");
-        btnVolver.addActionListener(e -> {
-            Administrador administradorFrame = new Administrador();
-            administradorFrame.setVisible(true);
-            dispose();
-            });
-        btnVolver.setBounds(5, 5, 63, 23);
-        barraSuperior.add(btnVolver);
 
 
         // Barra lateral
