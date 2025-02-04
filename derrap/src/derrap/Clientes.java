@@ -169,7 +169,7 @@ public class Clientes extends JFrame {
         barraLateral.add(btnFacturas);
 
         JLabel iconoUsuario = new JLabel("");
-        iconoUsuario.setIcon(new ImageIcon("C:\\Users\\MEDAC\\Desktop\\derrap\\src\\imagen\\añadir.png"));
+        iconoUsuario.setIcon(new ImageIcon("Imagen/añadir.png"));
         iconoUsuario.setBounds(33, 31, 53, 41);
         barraLateral.add(iconoUsuario);
         
@@ -177,13 +177,13 @@ public class Clientes extends JFrame {
         
 
         JLabel iconoFactura = new JLabel("");
-        iconoFactura.setIcon(new ImageIcon("C:\\Users\\MEDAC\\Desktop\\derrap\\src\\imagen\\factura.png"));
+        iconoFactura.setIcon(new ImageIcon("Imagen/factura.png"));
         iconoFactura.setBounds(33, 127, 64, 35);
         barraLateral.add(iconoFactura);
         
 
         JLabel iconoAlmacen = new JLabel("");
-        iconoAlmacen.setIcon(new ImageIcon("C:\\Users\\MEDAC\\Desktop\\derrap\\src\\imagen\\almacen.png"));
+        iconoAlmacen.setIcon(new ImageIcon("Imagen/almacen.png"));
         iconoAlmacen.setBounds(30, 207, 46, 41);
         barraLateral.add(iconoAlmacen);
 
@@ -192,7 +192,7 @@ public class Clientes extends JFrame {
         
         JLabel logoEmpresa = new JLabel("");
         logoEmpresa.setBounds(-17, -13, 164, 124);
-        logoEmpresa.setIcon(new ImageIcon("C:\\Users\\MEDAC\\Desktop\\derrap\\src\\imagen\\logo.png"));
+        logoEmpresa.setIcon(new ImageIcon("Imagen/logo.png"));
         topPanel.add(logoEmpresa);
 
         // Sección de Listas

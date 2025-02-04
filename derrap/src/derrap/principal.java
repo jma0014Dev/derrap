@@ -58,7 +58,7 @@ public class principal extends JFrame {
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
-                Image img = new ImageIcon(getClass().getResource("Imagen/fondo1.png")).getImage();
+             Image img = new ImageIcon(getClass().getResource("../images/fondo1.png")).getImage();
                 g.drawImage(img, 0, 0, getWidth(), getHeight(), this);
             }
         };
@@ -84,6 +84,8 @@ public class principal extends JFrame {
         panel.add(dniField);
         dniField.setColumns(10);
 
+       
+        
         JLabel lblNewLabel_1 = new JLabel("CONTRASEÑA");
         lblNewLabel_1.setForeground(Color.WHITE);
         lblNewLabel_1.setBounds(10, 79, 68, 14);

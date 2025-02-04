@@ -7,6 +7,8 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -30,10 +32,11 @@ public class AñadirMecanico extends JFrame {
     private JTextField txt1;
     private JTextField txt2;
     private JTextField txtDni;
-    private JTextField txtDebeTener;
+    private JTextField txtelefono;
     private JPasswordField passwordField;
     private Connection connection = null;
-
+    
+    
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -82,10 +85,11 @@ public class AñadirMecanico extends JFrame {
 
        ImageIcon scaledIconback= new ImageIcon(scaledImageback);
         JButton btnNewButton = new JButton("");
+        btnNewButton.setForeground(new Color(162, 117, 102));
         
         btnNewButton.setIcon(scaledIconback);
 
-        btnNewButton.setBackground(new Color(0, 0, 0));
+        btnNewButton.setBackground(new Color(162, 117, 102));
         btnNewButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             	   Administrador adminFrame = new Administrador();
@@ -126,23 +130,73 @@ public class AñadirMecanico extends JFrame {
         lblNewLabel_2.setBounds(134, 415, 99, 27);
         topPanel.add(lblNewLabel_2);
 
-        txtDni = new JTextField();
-        txtDni.setText("Debe incluir 8 numeros y una letra");
-        txtDni.setBounds(122, 453, 258, 61);
-        topPanel.add(txtDni);
+        JTextField txtDni = new JTextField();
+        txtDni.setText("Debe incluir 8 números y una letra");
+        txtDni.setForeground(Color.GRAY);
+        txtDni.setBounds(122, 464, 258, 61);
         txtDni.setColumns(10);
+
+        txtDni.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (txtDni.getText().equals("Debe incluir 8 números y una letra")) {
+                    txtDni.setText("");
+                    txtDni.setForeground(Color.BLACK);
+                }
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (txtDni.getText().isEmpty()) {
+                    txtDni.setText("Debe incluir 8 números y una letra");
+                    txtDni.setForeground(Color.GRAY);
+                }
+            }
+        });
+        
+
+        topPanel.add(txtDni);
+        
+        
+        
 
         JLabel lblNewLabel_3 = new JLabel("Nº de Telefono");
         lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 26));
         lblNewLabel_3.setBounds(728, 124, 208, 31);
         topPanel.add(lblNewLabel_3);
 
-        txtDebeTener = new JTextField();
-        txtDebeTener.setText("Debe tener 9 digitos");
-        txtDebeTener.setBounds(728, 168, 295, 61);
-        topPanel.add(txtDebeTener);
-        txtDebeTener.setColumns(10);
+        JTextField txtelefono = new JTextField();
+        txtelefono.setText("Debe incluir 9 digitos");
+        txtelefono.setForeground(Color.GRAY);
+        txtelefono.setBounds(705, 168, 295, 61);
+        txtelefono.setColumns(10);
 
+        txtelefono.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (txtelefono.getText().equals("Debe incluir 9 digitos")) {
+                	txtelefono.setText("");
+                	txtelefono.setForeground(Color.BLACK);
+                }
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (txtelefono.getText().isEmpty()) {
+                	txtelefono.setText("Debe incluir 9 digitos");
+                	txtelefono.setForeground(Color.GRAY);
+                }
+            }
+        });
+
+        topPanel.add(txtelefono);
+
+        
+        
+        
+      
+        
+        
         JLabel lblNewLabel_4 = new JLabel("Contraseña");
         lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 26));
         lblNewLabel_4.setBounds(728, 262, 151, 37);
@@ -150,7 +204,7 @@ public class AñadirMecanico extends JFrame {
 
         passwordField = new JPasswordField();
         passwordField.setToolTipText("");
-        passwordField.setBounds(728, 307, 295, 61);
+        passwordField.setBounds(705, 307, 295, 61);
       
         topPanel.add(passwordField);
 
@@ -198,7 +252,7 @@ public class AñadirMecanico extends JFrame {
        
        
         btn5.setForeground(Color.WHITE);
-        btn5.setBackground(new Color(128, 0, 0));
+        btn5.setBackground(new Color(192, 192, 192));
         btn5.setBounds(26, 11, 53, 55);
         panel_1.add(btn5);
         
@@ -215,14 +269,13 @@ public class AñadirMecanico extends JFrame {
         	public void actionPerformed(ActionEvent e) {
         	}
         });
-        bt5.setForeground(new Color(255, 255, 255));
-        bt5.setBackground(new Color(128, 0, 0));
+        bt5.setForeground(new Color(162, 117, 102));
+        bt5.setBackground(new Color(162, 117, 102));
         bt5.setBounds(26, 159, 53, 55);
         panel_1.add(bt5);
         
         
         bt5.setForeground(Color.WHITE);
-        bt5.setBackground(new Color(128, 0, 0));
         bt5.setBounds(26, 159, 53, 55);
         panel_1.add(bt5);
         
@@ -239,8 +292,8 @@ public class AñadirMecanico extends JFrame {
         	public void actionPerformed(ActionEvent e) {
         	}
         });
-        btn6.setForeground(new Color(255, 255, 255));
-        btn6.setBackground(new Color(128, 0, 0));
+        btn6.setForeground(new Color(162, 117, 102));
+        btn6.setBackground(new Color(162, 117, 102));
         btn6.setBounds(26, 88, 53, 55);
         panel_1.add(btn6);
         
@@ -249,7 +302,6 @@ public class AñadirMecanico extends JFrame {
         
         
         btn6.setForeground(Color.WHITE);
-        btn6.setBackground(new Color(128, 0, 0));
         btn6.setBounds(26, 88, 53, 55);
         panel_1.add(btn6);
         
@@ -257,14 +309,18 @@ public class AñadirMecanico extends JFrame {
         lblNewLabel_8.setIcon(new ImageIcon("Imagen/logo.png"));
         lblNewLabel_8.setBounds(0, 0, 197, 110);
         topPanel.add(lblNewLabel_8);
+        
+        
     }
 
     private void insertarMecanico() {
         String nombre = txt1.getText();
         String apellido = txt2.getText();
         String dni = txtDni.getText();
-        String telefono = txtDebeTener.getText();
+        String telefono = txtelefono.getText();
+      
         String contraseña = new String(passwordField.getPassword());
+        
 
         // Validar campos
         if (nombre.isEmpty() || apellido.isEmpty() || dni.isEmpty() || telefono.isEmpty() || contraseña.isEmpty()) {
@@ -286,6 +342,7 @@ public class AñadirMecanico extends JFrame {
             stmt.setString(2, apellido);
             stmt.setString(3, dni);
             stmt.setString(4, contraseña);
+        
 
             int rowsInserted = stmt.executeUpdate();
             if (rowsInserted > 0) {
@@ -301,7 +358,7 @@ public class AñadirMecanico extends JFrame {
         try {
             String DB_URL = "jdbc:mysql://localhost:3306/derrap";
             String DB_USER = "root";
-            String DB_PASSWORD = "medac123";
+            String DB_PASSWORD = "Medac123";
 
             connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
         } catch (SQLException e) {

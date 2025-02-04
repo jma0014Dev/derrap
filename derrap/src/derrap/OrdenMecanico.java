@@ -104,24 +104,24 @@ public class OrdenMecanico extends JFrame {
         panel_1.add(btn6);
         
         JLabel lblNewLabel_5 = new JLabel("");
-        lblNewLabel_5.setIcon(new ImageIcon("C:\\Users\\MEDAC\\Downloads\\añadir.png"));
+        lblNewLabel_5.setIcon(new ImageIcon("Imagen/añadir.png"));
         lblNewLabel_5.setBounds(36, 38, 46, 47);
         panel_1.add(lblNewLabel_5);
         
         JLabel lblNewLabel_6 = new JLabel("");
-        lblNewLabel_6.setIcon(new ImageIcon("C:\\Users\\MEDAC\\Downloads\\facturas.png"));
+        lblNewLabel_6.setIcon(new ImageIcon("Imagen/facturas.png"));
         lblNewLabel_6.setBounds(33, 127, 64, 35);
         panel_1.add(lblNewLabel_6);
         
         JLabel lblNewLabel_7 = new JLabel("");
-        lblNewLabel_7.setIcon(new ImageIcon("C:\\Users\\MEDAC\\Downloads\\almacen.png"));
+        lblNewLabel_7.setIcon(new ImageIcon("Imagen/almacen.png"));
         lblNewLabel_7.setBounds(24, 207, 46, 41);
         panel_1.add(lblNewLabel_7);
         
         JLabel lblNewLabel_8 = new JLabel("");
         lblNewLabel_8.setBounds(-17, -13, 164, 124);
         topPanel.add(lblNewLabel_8);
-        lblNewLabel_8.setIcon(new ImageIcon("C:\\Users\\MEDAC\\Desktop\\derrap\\src\\imagen\\logo.png"));
+        lblNewLabel_8.setIcon(new ImageIcon("Imagen/logo.png"));
         
         JLabel listaOrdenes = new JLabel("Lista Ordenes");
         listaOrdenes.setFont(new Font("Verdana", Font.PLAIN, 25));
