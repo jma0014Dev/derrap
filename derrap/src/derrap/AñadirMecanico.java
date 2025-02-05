@@ -213,7 +213,9 @@ public class AñadirMecanico extends JFrame {
             public void actionPerformed(ActionEvent e) {
             	conectarBaseDatos();
                 insertarMecanico();
+                JOptionPane.showMessageDialog(null, "Mecánico añadido", "Éxito", JOptionPane.INFORMATION_MESSAGE);
             }
+            
         });
         btn1.setFont(new Font("Tahoma", Font.PLAIN, 17));
         btn1.setBackground(new Color(0, 0, 0));
@@ -358,7 +360,7 @@ public class AñadirMecanico extends JFrame {
         try {
             String DB_URL = "jdbc:mysql://localhost:3306/derrap";
             String DB_USER = "root";
-            String DB_PASSWORD = "Medac123";
+            String DB_PASSWORD = "root";
 
             connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
         } catch (SQLException e) {
