@@ -110,8 +110,8 @@ public class Mecanico extends JFrame {
         JButton verCocheButton = new JButton("Ver coches en taller");
         verCocheButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                ListadoCoches listadoCoches = new ListadoCoches();
-                listadoCoches.setVisible(true);
+                VerCoches VerCoches2 = new VerCoches();
+                VerCoches2.setVisible(true);
             }
         });
         verCocheButton.setBounds(142, 243, 194, 34);
