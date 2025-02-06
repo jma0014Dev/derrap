@@ -70,7 +70,7 @@ public class VerCoches extends JFrame {
         panel.setBounds(134, 0, 908, 61);
         panel.setBackground(new Color(162, 117, 102));
         topPanel.add(panel);
-        panel.setLayout(null);
+        panel.setLayout(null);//nvkfdnkdfknfbdkn
        
         JLabel lblNewLabel = new JLabel("Coches en taller");
         lblNewLabel.setBounds(8, 35, 122, 20);
