@@ -89,7 +89,7 @@ public class Administrador extends JFrame {
         
         btnNewButton.setIcon(scaledIconback);
 
-        btnNewButton.setBackground(new Color(0, 0, 0));
+        btnNewButton.setBackground(new Color(162, 117, 104));
         btnNewButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             }
@@ -128,7 +128,7 @@ public class Administrador extends JFrame {
            }
        });
        btn5.setForeground(new Color(255, 255, 255));
-       btn5.setBackground(new Color(128, 0, 0));
+       btn5.setBackground(new Color(162, 117, 104));
        btn5.setBounds(26, 11, 53, 55);
        panel_1.add(btn5);
 
@@ -154,7 +154,7 @@ public class Administrador extends JFrame {
         	}
         });
         bt5.setForeground(new Color(255, 255, 255));
-        bt5.setBackground(new Color(128, 0, 0));
+        bt5.setBackground(new Color(162, 117, 104));
         bt5.setBounds(26, 159, 53, 55);
         panel_1.add(bt5);
         
@@ -175,11 +175,15 @@ public class Administrador extends JFrame {
         btn6.setIcon(scaledIcon);
         
         btn6.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        	}
-        });
+        	 public void actionPerformed(ActionEvent e) {
+                 // Crear una nueva instancia de Factura y hacerla visible
+                 Facturas frame = new Facturas();
+                 frame.setVisible(true);
+                 dispose();
+             }
+         });
         btn6.setForeground(new Color(255, 255, 255));
-        btn6.setBackground(new Color(128, 0, 0));
+        btn6.setBackground(new Color(162, 117, 104));
         btn6.setBounds(26, 88, 53, 55);
         panel_1.add(btn6);
         
