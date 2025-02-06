@@ -130,7 +130,7 @@ public class AñadirMecanico extends JFrame {
         lblNewLabel_2.setBounds(134, 415, 99, 27);
         topPanel.add(lblNewLabel_2);
 
-        JTextField txtDni = new JTextField();
+         txtDni = new JTextField();
         txtDni.setText("Debe incluir 8 números y una letra");
         txtDni.setForeground(Color.GRAY);
         txtDni.setBounds(122, 464, 258, 61);
@@ -165,7 +165,7 @@ public class AñadirMecanico extends JFrame {
         lblNewLabel_3.setBounds(728, 124, 208, 31);
         topPanel.add(lblNewLabel_3);
 
-        JTextField txtelefono = new JTextField();
+        txtelefono = new JTextField();
         txtelefono.setText("Debe incluir 9 digitos");
         txtelefono.setForeground(Color.GRAY);
         txtelefono.setBounds(705, 168, 295, 61);
@@ -211,7 +211,7 @@ public class AñadirMecanico extends JFrame {
         JButton btn1 = new JButton("Insertar mecanico");
         btn1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	conectarBaseDatos();
+            	
                 insertarMecanico();
                 JOptionPane.showMessageDialog(null, "Mecánico añadido", "Éxito", JOptionPane.INFORMATION_MESSAGE);
             }
@@ -333,7 +333,7 @@ public class AñadirMecanico extends JFrame {
         // Conexión a la base de datos
         String url = "jdbc:mysql://localhost:3306/derrap";
         String user = "root";
-        String password = "Medac123";
+        String password = "root";
 
         String query = "INSERT INTO mecanico (nombre, apellido, dni, contraseña) VALUES (?, ?, ?, ?)";
 
@@ -356,18 +356,6 @@ public class AñadirMecanico extends JFrame {
             System.out.println("Error al insertar mecánico.");
         }
     }
-    private void conectarBaseDatos() {
-        try {
-            String DB_URL = "jdbc:mysql://localhost:3306/derrap";
-            String DB_USER = "root";
-            String DB_PASSWORD = "root";
-
-            connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
-        } catch (SQLException e) {
-        	
-        	
-            JOptionPane.showMessageDialog(this, "Error al conectar con la base de datos: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }
+   
 }
 
