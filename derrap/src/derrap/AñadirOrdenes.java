@@ -127,7 +127,7 @@ public class AñadirOrdenes extends JFrame {
                      "factura_id_factura, administrador_dni, administrador_mecanico_dni) " +
                      "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/derrap", "root", "root"); 
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhOst:3306/derrap", "root", "root"); 
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, idPedido);
