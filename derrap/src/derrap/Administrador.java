@@ -57,7 +57,7 @@ public class Administrador extends JFrame {
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(new BorderLayout());
-        setLocation(0, 0);
+        setLocation(400, 100);
         
 
         // Etiqueta en la parte superior
@@ -177,7 +177,7 @@ public class Administrador extends JFrame {
         btn6.addActionListener(new ActionListener() {
         	 public void actionPerformed(ActionEvent e) {
                  // Crear una nueva instancia de Factura y hacerla visible
-                 Facturas frame = new Facturas();
+                 Ordenes frame = new Ordenes();
                  frame.setVisible(true);
                  dispose();
              }

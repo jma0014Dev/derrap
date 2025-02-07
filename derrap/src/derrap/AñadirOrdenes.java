@@ -5,22 +5,23 @@ import java.awt.event.*;
 import java.sql.*;
 
 public class AñadirOrdenes extends JFrame {
-    // Declaración de los campos de la interfaz
+
     private JTextField tfIdPedido, tfPrecio, tfPiezaSolicitada, tfFechaVisita, tfMatriculaVehiculo, tfMecanicoDni, tfFacturaId, tfAdministradorDni, tfAdministradorMecanicoDni;
 
     public AñadirOrdenes() {
-        // Configurar la ventana
+ 
         setTitle("Insertar Nueva Orden");
         setSize(556, 504);
-        getContentPane().setLayout(null);  // Usamos AbsoluteLayout (null layout)
+        getContentPane().setLayout(null);  
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        // Crear los campos de texto
+        setLocation(400, 100);
+  
         tfIdPedido = new JTextField(10);
         tfPrecio = new JTextField(10);
         tfPiezaSolicitada = new JTextField(10);
-        tfFechaVisita = new JTextField(10); // Campo de texto para la fecha
-        tfMatriculaVehiculo = new JTextField(10); // Campo de texto para la matrícula del vehículo
+        tfFechaVisita = new JTextField(10);
+        tfFechaVisita.setText("(YYY-MM-DD)");
+        tfMatriculaVehiculo = new JTextField(10); 
         tfMecanicoDni = new JTextField(10);
         tfFacturaId = new JTextField(10);
         tfAdministradorDni = new JTextField(10);
@@ -32,19 +33,19 @@ public class AñadirOrdenes extends JFrame {
         // Posicionar los componentes en la ventana
         JLabel lblIdPedido = new JLabel("ID Pedido:");
         lblIdPedido.setBounds(20, 20, 100, 25);
-        tfIdPedido.setBounds(120, 20, 150, 25);
+        tfIdPedido.setBounds(140, 20, 150, 25);
 
         JLabel lblPrecio = new JLabel("Precio:");
         lblPrecio.setBounds(20, 60, 100, 25);
-        tfPrecio.setBounds(120, 60, 150, 25);
+        tfPrecio.setBounds(140, 60, 150, 25);
 
         JLabel lblPiezaSolicitada = new JLabel("Pieza solicitada:");
         lblPiezaSolicitada.setBounds(20, 100, 120, 25);
         tfPiezaSolicitada.setBounds(140, 100, 150, 25);
 
-        JLabel lblFechaVisita = new JLabel("Fecha visita (DD/MM/YYYY):");
+        JLabel lblFechaVisita = new JLabel("Fecha visita ");
         lblFechaVisita.setBounds(20, 140, 180, 25);
-        tfFechaVisita.setBounds(200, 140, 150, 25);
+        tfFechaVisita.setBounds(140, 140, 150, 25);
 
         JLabel lblMatriculaVehiculo = new JLabel("Matrícula Vehículo:");
         lblMatriculaVehiculo.setBounds(20, 180, 120, 25);
@@ -64,7 +65,7 @@ public class AñadirOrdenes extends JFrame {
 
         JLabel lblAdministradorMecanicoDni = new JLabel("Admin Mecánico DNI:");
         lblAdministradorMecanicoDni.setBounds(20, 340, 140, 25);
-        tfAdministradorMecanicoDni.setBounds(160, 340, 150, 25);
+        tfAdministradorMecanicoDni.setBounds(140, 340, 150, 25);
 
         btnInsertar.setBounds(120, 380, 150, 30);
 
@@ -88,6 +89,17 @@ public class AñadirOrdenes extends JFrame {
         getContentPane().add(lblAdministradorMecanicoDni);
         getContentPane().add(tfAdministradorMecanicoDni);
         getContentPane().add(btnInsertar);
+        
+        JButton btnNewButton = new JButton("Atras");
+        btnNewButton.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		 Ordenes frame = new Ordenes();
+	               frame.setVisible(true);
+	               dispose();
+        	}
+        });
+        btnNewButton.setBounds(317, 384, 89, 23);
+        getContentPane().add(btnNewButton);
 
         // Acción al presionar el botón
         btnInsertar.addActionListener(new ActionListener() {
@@ -127,7 +139,7 @@ public class AñadirOrdenes extends JFrame {
                      "factura_id_factura, administrador_dni, administrador_mecanico_dni) " +
                      "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhOst:3306/derrap", "root", "root"); 
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhOst:3306/derrap", "root", "Medac123"); 
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, idPedido);

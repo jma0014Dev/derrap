@@ -1,216 +1,90 @@
 package derrap;
 
-import java.awt.EventQueue;
+import java.awt.Font;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import java.awt.Color;
-import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.ImageIcon;
-import java.awt.Font;
-import java.awt.Image;
-import java.awt.event.ActionEvent;
+import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Facturas extends JFrame {
 
-	private static final long serialVersionUID = 1L;
-	private JPanel contentPane;
+    private static final long serialVersionUID = 1L;
+    private JPanel contentPane;
+    
+    private static final String URL = "jdbc:mysql://localhost:3306/derrap";
+    private static final String USER = "root";
+    private static final String PASSWORD = "Medac123"; // Cambiar si es necesario
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Facturas frame = new Facturas();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
-	public Facturas() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1097, 655);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
-		
-		JPanel panel_1 = new JPanel();
-		panel_1.setLayout(null);
-		panel_1.setForeground(new Color(162, 117, 102));
-		panel_1.setBackground(new Color(162, 117, 102));
-		panel_1.setBounds(0, 105, 99, 757);
-		contentPane.add(panel_1);
-		
-	     ImageIcon original5 = new ImageIcon("Imagen/añadirMecanico.png");
-	        Image scaledImage5 = original5.getImage().getScaledInstance(50,-1,java.awt.Image.SCALE_DEFAULT);
-	        //ImageIcon iconoEscala = new ImageIcon(original6.getImage().getScaledInstance(5, 5, java.awt.Image.SCALE_DEFAULT));
-
-	       ImageIcon scaledIcon5= new ImageIcon(scaledImage5);
-	        
-	       JButton btn5 = new JButton("");
-	       btn5.setBackground(new Color(162, 117, 104));
-	       btn5.setIcon(scaledIcon5);
-	       
-	       btn5.addActionListener(new ActionListener() {
-	           public void actionPerformed(ActionEvent e) {
-	               
-	           }
-	       });
-	       
-	       btn5.setBounds(26, 11, 53, 55);
-	       panel_1.add(btn5);
-	       
-		
-		
-		
-		
-		  ImageIcon original0 = new ImageIcon("Imagen/almacen.png");
-	        Image scaledImage0 = original0.getImage().getScaledInstance(50,-1,java.awt.Image.SCALE_DEFAULT);
-	        //ImageIcon iconoEscala = new ImageIcon(original6.getImage().getScaledInstance(5, 5, java.awt.Image.SCALE_DEFAULT));
-
-	       ImageIcon scaledIcon0= new ImageIcon(scaledImage0);
-	        
-	        JButton bt5 = new JButton("");
-	        bt5.setIcon(scaledIcon0);
-	        
-	        bt5.addActionListener(new ActionListener() {
-	        	public void actionPerformed(ActionEvent e) {
-	        	}
-	        });
-	        bt5.setForeground(new Color(162, 117, 102));
-	        bt5.setBackground(new Color(162, 117, 102));
-	        bt5.setBounds(26, 159, 53, 55);
-	        panel_1.add(bt5);
-		
-		
-	        
-	        
-	        
-		  ImageIcon original6 = new ImageIcon("Imagen/Facturaas.png");
-	        Image scaledImage = original6.getImage().getScaledInstance(50,-1,java.awt.Image.SCALE_DEFAULT);
-	        //ImageIcon iconoEscala = new ImageIcon(original6.getImage().getScaledInstance(5, 5, java.awt.Image.SCALE_DEFAULT));
-
-	       ImageIcon scaledIcon= new ImageIcon(scaledImage);
-	        
-	        JButton btn6 = new JButton("");
-	        btn6.setIcon(scaledIcon);
-	        btn6.setEnabled(false);
-	        btn6.addActionListener(new ActionListener() {
-	        	public void actionPerformed(ActionEvent e) {
-	        	}
-	        });
-	        btn6.setForeground(new Color(162, 117, 102));
-	        btn6.setBackground(new Color(192, 192, 192));
-	        btn6.setBounds(26, 88, 53, 55);
-	        panel_1.add(btn6);
-	        
-		
-	        
-	        
-	        
-		
-		JLabel lblNewLabel_8 = new JLabel("");
-		lblNewLabel_8.setIcon(new ImageIcon("Imagen/logo.png"));
-		lblNewLabel_8.setBounds(0, 0, 197, 110);
-		contentPane.add(lblNewLabel_8);
-		
-		JPanel panel = new JPanel();
-		panel.setLayout(null);
-		panel.setBackground(new Color(162, 117, 102));
-		panel.setBounds(151, 0, 1024, 61);
-		contentPane.add(panel);
-		
-		JLabel lblNewLabel = new JLabel("Facturas");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel.setBounds(8, 35, 226, 20);
-		panel.add(lblNewLabel);
-		
-		 ImageIcon originalback = new ImageIcon("Imagen/back.png");
-	        Image scaledImageback = originalback.getImage().getScaledInstance(40,-5,java.awt.Image.SCALE_DEFAULT);
-	        //ImageIcon iconoEscala = new ImageIcon(original6.getImage().getScaledInstance(5, 5, java.awt.Image.SCALE_DEFAULT));
-
-	       ImageIcon scaledIconback= new ImageIcon(scaledImageback);
-	        JButton btnNewButton = new JButton("");
-	        btnNewButton.setForeground(new Color(162, 117, 102));
-	        
-	        btnNewButton.setIcon(scaledIconback);
-
-	        btnNewButton.setBackground(new Color(162, 117, 102));
-	        btnNewButton.addActionListener(new ActionListener() {
-	            public void actionPerformed(ActionEvent e) {
-	            	   Administrador adminFrame = new Administrador();
-	                   adminFrame.setVisible(true);
-	                   
-	                 
-	                   dispose();
-	            }
-	        });
-	        btnNewButton.setBounds(5, 5, 63, 23);
-	        panel.add(btnNewButton);
-	        
-	        
-	        
-		btnNewButton.setForeground(new Color(162, 117, 102));
-		btnNewButton.setBackground(new Color(162, 117, 102));
-		btnNewButton.setBounds(5, 5, 63, 23);
-		panel.add(btnNewButton);
-		
-		JLabel lblNewLabel_1 = new JLabel("");
-		 lblNewLabel_1.setIcon(new ImageIcon("Imagen/añadirfactura.png"));
-		lblNewLabel_1.setBounds(161, 105, 110, 82);
-		contentPane.add(lblNewLabel_1);
-		
-		JLabel lblNewLabel_2 = new JLabel("");
-		lblNewLabel_2.setIcon(new ImageIcon("Imagen/actualizarfactura.png"));
-		lblNewLabel_2.setBounds(362, 105, 110, 82);
-		contentPane.add(lblNewLabel_2);
-		
-		JLabel lblNewLabel_3 = new JLabel("");
-		lblNewLabel_3.setIcon(new ImageIcon("Imagen/eliminarfactura.png"));
-		lblNewLabel_3.setBounds(556, 105, 110, 82);
-		contentPane.add(lblNewLabel_3);
-		
-		JButton btnNewButton_1 = new JButton("Añadir ");
-		btnNewButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				 AñadirOrdenes frame = new AñadirOrdenes();
-	               frame.setVisible(true);
-	               dispose();
-				
-			}
-		});
-		btnNewButton_1.setBackground(new Color(162, 117, 104));
-		btnNewButton_1.setForeground(new Color(255, 255, 255));
-		btnNewButton_1.setBounds(161, 198, 110, 25);
-		contentPane.add(btnNewButton_1);
-		
-		JButton btnNewButton_2 = new JButton("Actualizar");
-		btnNewButton_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnNewButton_2.setBackground(new Color(162, 117, 104));
-		btnNewButton_2.setForeground(new Color(255, 255, 255));
-		btnNewButton_2.setBounds(362, 198, 110, 25);
-		contentPane.add(btnNewButton_2);
-		
-		JButton btnNewButton_3 = new JButton("Eliminar");
-		btnNewButton_3.setBackground(new Color(162, 117, 104));
-		btnNewButton_3.setForeground(new Color(255, 255, 255));
-		btnNewButton_3.setBounds(556, 198, 110, 24);
-		contentPane.add(btnNewButton_3);
-	}
+    public Facturas(int idFactura) {
+        setTitle("Factura");
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setBounds(100, 100, 450, 350);
+        contentPane = new JPanel();
+        contentPane.setBorder(new EmptyBorder(10, 10, 10, 10));
+        setContentPane(contentPane);
+        contentPane.setLayout(null);
+        setLocation(400, 100);
+        
+        // Label para mostrar la información de la factura con formato HTML
+        JLabel lblFacturaInfo = new JLabel("<html>Cargando factura...</html>");
+        lblFacturaInfo.setFont(new Font("Arial", Font.PLAIN, 14));
+        lblFacturaInfo.setBounds(10, 10, 420, 200);
+        contentPane.add(lblFacturaInfo);
+        
+        cargarFactura(idFactura, lblFacturaInfo);
+        
+        // Botón para volver a las órdenes (cierra esta ventana)
+        JButton btnVolver = new JButton("Volver a Ordenes");
+        btnVolver.setFont(new Font("Arial", Font.BOLD, 12));
+        btnVolver.setBounds(150, 250, 150, 30);
+        contentPane.add(btnVolver);
+        btnVolver.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                dispose(); // Cierra la ventana actual y regresa a la ventana de órdenes (que debe estar abierta)
+            }
+        });
+    }
+    
+    private void cargarFactura(int idFactura, JLabel label) {
+        String query = "SELECT * FROM factura WHERE id_factura = ?";
+        
+        try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+            
+            stmt.setInt(1, idFactura);
+            ResultSet rs = stmt.executeQuery();
+            
+            if (rs.next()) {
+                String fecha = rs.getString("Fecha");
+                int precio = rs.getInt("Precio");
+                String fechaPago = rs.getString("Fecha_pago");
+                String metodoPago = rs.getString("Metodo_pago");
+                
+                String facturaInfo = "<html>"
+                        + "<h2>Factura ID: " + idFactura + "</h2>"
+                        + "<p><strong>Fecha:</strong> " + fecha + "<br>"
+                        + "<strong>Precio:</strong> " + precio + "€<br>"
+                        + "<strong>Fecha de Pago:</strong> " + fechaPago + "<br>"
+                        + "<strong>Método de Pago:</strong> " + metodoPago + "</p>"
+                        + "</html>";
+                
+                label.setText(facturaInfo);
+            } else {
+                label.setText("<html><h2>Factura no encontrada.</h2></html>");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            label.setText("<html><h2>Error al cargar la factura.</h2></html>");
+        }
+    }
 }
+
