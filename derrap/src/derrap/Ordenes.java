@@ -189,6 +189,7 @@ public class Ordenes extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				 AñadirOrdenes frame = new AñadirOrdenes();
 	               frame.setVisible(true);
+	               dispose();
 	               
 				
 			}
@@ -203,7 +204,7 @@ public class Ordenes extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				 ActualizarOrdenes frame = new ActualizarOrdenes();
 	               frame.setVisible(true);
-	            
+	               dispose();
 			}
 		});
 		btnNewButton_2.setBackground(new Color(162, 117, 104));
@@ -216,7 +217,7 @@ public class Ordenes extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				 EliminarOrdenes frame = new EliminarOrdenes();
 	               frame.setVisible(true);
-	            
+	               dispose();
 			}
 		});
 		btnNewButton_3.setBackground(new Color(162, 117, 104));
@@ -229,6 +230,7 @@ public class Ordenes extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				 VerOrdenes frame = new VerOrdenes();
 	               frame.setVisible(true);
+	               dispose();
 			}
 		});
 		btnNewButton_4.setForeground(new Color(255, 255, 255));
