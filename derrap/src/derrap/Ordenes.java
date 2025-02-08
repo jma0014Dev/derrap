@@ -55,21 +55,27 @@ public class Ordenes extends JFrame {
 		panel_1.setBounds(0, 105, 99, 757);
 		contentPane.add(panel_1);
 		
-	     ImageIcon original5 = new ImageIcon("Imagen/añadirMecanico.png");
+		 ImageIcon original5 = new ImageIcon("Imagen/añadirMecanico.png");
 	        Image scaledImage5 = original5.getImage().getScaledInstance(50,-1,java.awt.Image.SCALE_DEFAULT);
 	        //ImageIcon iconoEscala = new ImageIcon(original6.getImage().getScaledInstance(5, 5, java.awt.Image.SCALE_DEFAULT));
 
 	       ImageIcon scaledIcon5= new ImageIcon(scaledImage5);
 	        
 	       JButton btn5 = new JButton("");
-	       btn5.setBackground(new Color(162, 117, 104));
 	       btn5.setIcon(scaledIcon5);
-	       
+
 	       btn5.addActionListener(new ActionListener() {
 	           public void actionPerformed(ActionEvent e) {
 	               
+	               AñadirMecanico frame = new AñadirMecanico();
+	               frame.setVisible(true);
+	               dispose();
 	           }
 	       });
+	       btn5.setForeground(new Color(255, 255, 255));
+	       btn5.setBackground(new Color(162, 117, 104));
+	       btn5.setBounds(26, 11, 53, 55);
+	       panel_1.add(btn5);
 	       
 	       btn5.setBounds(26, 11, 53, 55);
 	       panel_1.add(btn5);

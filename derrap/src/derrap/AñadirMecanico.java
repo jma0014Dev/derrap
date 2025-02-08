@@ -218,7 +218,7 @@ public class AñadirMecanico extends JFrame {
             
         });
         btn1.setFont(new Font("Tahoma", Font.PLAIN, 17));
-        btn1.setBackground(new Color(0, 0, 0));
+        btn1.setBackground(new Color(164, 117, 104));
         btn1.setForeground(new Color(255, 255, 255));
         btn1.setBounds(120, 561, 260, 37);
         topPanel.add(btn1);
@@ -291,9 +291,13 @@ public class AñadirMecanico extends JFrame {
         btn6.setIcon(scaledIcon);
         
         btn6.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        	}
-        });
+        	 public void actionPerformed(ActionEvent e) {
+                 // Crear una nueva instancia de Factura y hacerla visible
+                 Ordenes frame = new Ordenes();
+                 frame.setVisible(true);
+                 dispose();
+             }
+         });
         btn6.setForeground(new Color(162, 117, 102));
         btn6.setBackground(new Color(162, 117, 102));
         btn6.setBounds(26, 88, 53, 55);

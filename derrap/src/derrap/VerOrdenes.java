@@ -2,6 +2,10 @@ package derrap;
 
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.GradientPaint;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -13,12 +17,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.TitledBorder;
+import javax.swing.BorderFactory;
+import javax.swing.JLabel;
 
 public class VerOrdenes extends JFrame {
 
@@ -47,22 +55,59 @@ public class VerOrdenes extends JFrame {
     public VerOrdenes() {
         setTitle("Ver Órdenes");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 500, 450);
-        contentPane = new JPanel();
-        contentPane.setBorder(new EmptyBorder(10, 10, 10, 10));
-        setContentPane(contentPane);
-        contentPane.setLayout(null);
+        setBounds(100, 100, 724, 509);
         setLocation(400, 100);
         
+        // Crear un panel con fondo degradado y borde titulado
+        JPanel backgroundPanel = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                Graphics2D g2 = (Graphics2D) g;
+                int width = getWidth();
+                int height = getHeight();
+                // Degradado vertical: de un tono claro a un tono marrón suave
+                GradientPaint gp = new GradientPaint(0, 0, new Color(245, 245, 245), 0, height, new Color(220, 200, 190));
+                g2.setPaint(gp);
+                g2.fillRect(0, 0, width, height);
+            }
+        };
+        backgroundPanel.setLayout(null);
+        backgroundPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
+        
+        TitledBorder titleBorder = BorderFactory.createTitledBorder(
+                BorderFactory.createLineBorder(new Color(162, 117, 104), 2),
+                "Ver Órdenes",
+                TitledBorder.CENTER,
+                TitledBorder.TOP,
+                new Font("SansSerif", Font.BOLD, 18),
+                new Color(162, 117, 104)
+        );
+        backgroundPanel.setBorder(titleBorder);
+        
+        setContentPane(backgroundPanel);
+        contentPane = backgroundPanel;
         
         modeloLista = new DefaultListModel<>();
-        listaOrdenes = new JList<>(modeloLista);
-        listaOrdenes.setFont(new Font("Arial", Font.PLAIN, 14));
-        JScrollPane scrollPane = new JScrollPane(listaOrdenes);
-        scrollPane.setBounds(10, 10, 460, 320);
-        contentPane.add(scrollPane);
         
         cargarOrdenes();
+        
+        // Botón para volver
+        JButton btnVolver = new JButton("Volver");
+        btnVolver.setFont(new Font("Arial", Font.BOLD, 14));
+        btnVolver.setBounds(204, 349, 120, 30);
+        btnVolver.setBackground(new Color(164, 117, 104));
+        btnVolver.setForeground(Color.WHITE);
+        contentPane.add(btnVolver);
+        listaOrdenes = new JList<>(modeloLista);
+        listaOrdenes.setBounds(34, 24, 458, 318);
+        backgroundPanel.add(listaOrdenes);
+        listaOrdenes.setFont(new Font("Arial", Font.PLAIN, 14));
+        
+        JLabel lblNewLabel = new JLabel("");
+        lblNewLabel.setIcon(new ImageIcon("Imagen/logo.png"));
+        lblNewLabel.setBounds(512, 24, 188, 101);
+        backgroundPanel.add(lblNewLabel);
         
         listaOrdenes.addMouseListener(new MouseAdapter() {
             @Override
@@ -75,18 +120,11 @@ public class VerOrdenes extends JFrame {
                 }
             }
         });
-        
-        // Botón para volver
-        JButton btnVolver = new JButton("Volver");
-        btnVolver.setFont(new Font("Arial", Font.BOLD, 14));
-        btnVolver.setBounds(180, 350, 120, 30);
-        contentPane.add(btnVolver);
         btnVolver.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	 Ordenes frame = new Ordenes();
-	               frame.setVisible(true);
-	               dispose();
-               
+                Ordenes frame = new Ordenes();
+                frame.setVisible(true);
+                dispose();
             }
         });
     }

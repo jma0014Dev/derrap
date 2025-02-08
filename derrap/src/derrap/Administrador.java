@@ -121,7 +121,7 @@ public class Administrador extends JFrame {
 
        btn5.addActionListener(new ActionListener() {
            public void actionPerformed(ActionEvent e) {
-               // Crear una nueva instancia de AñadirMecanico y hacerla visible
+               
                AñadirMecanico frame = new AñadirMecanico();
                frame.setVisible(true);
                dispose();
