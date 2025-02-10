@@ -98,8 +98,7 @@ public class Mecanico extends JFrame {
         panel_1.add(agregarCocheButton);
         agregarCocheButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                AgregarCoche agregarCoche = new AgregarCoche();
-                agregarCoche.setVisible(true);
+
             }
         });
         

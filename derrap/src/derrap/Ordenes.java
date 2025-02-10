@@ -80,10 +80,7 @@ public class Ordenes extends JFrame {
 	       btn5.setBounds(26, 11, 53, 55);
 	       panel_1.add(btn5);
 	       
-		
-		
-		
-		
+	
 		  ImageIcon original0 = new ImageIcon("Imagen/almacen.png");
 	        Image scaledImage0 = original0.getImage().getScaledInstance(50,-1,java.awt.Image.SCALE_DEFAULT);
 	        //ImageIcon iconoEscala = new ImageIcon(original6.getImage().getScaledInstance(5, 5, java.awt.Image.SCALE_DEFAULT));

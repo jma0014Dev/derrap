@@ -12,7 +12,7 @@ public class ConectarDB_mysql {
 	private static final String CONTROLADOR="com.mysql.jdbc.Driver";
 	private static final String URL="jdbc:mysql://localhost:3306/derrap";
 	private static final String USUARIO="root";
-	private static final String CLAVE="root";
+	private static final String CLAVE="Medac123";
 	
 	
 	Connection cn=null;

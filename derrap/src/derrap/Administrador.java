@@ -92,6 +92,9 @@ public class Administrador extends JFrame {
         btnNewButton.setBackground(new Color(162, 117, 104));
         btnNewButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+            	principal frame = new principal();
+                frame.setVisible(true);
+                dispose();
             }
         });
         btnNewButton.setBounds(5, 5, 63, 23);
@@ -199,6 +202,9 @@ public class Administrador extends JFrame {
         JButton btn1 = new JButton("Ver coches");
         btn1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+            	VerCoches clientesFrame = new VerCoches();
+		        clientesFrame.setVisible(true);
+		        dispose();
             }
         });
         btn1.setBounds(142, 243, 194, 34);
