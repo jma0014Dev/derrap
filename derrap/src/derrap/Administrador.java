@@ -154,6 +154,9 @@ public class Administrador extends JFrame {
         
         bt5.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
+        		Stock frame = new Stock();
+                frame.setVisible(true);
+                dispose();
         	}
         });
         bt5.setForeground(new Color(255, 255, 255));

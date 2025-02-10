@@ -30,7 +30,6 @@ public class VerCoches extends JFrame {
         contentPane.add(topPanel, BorderLayout.CENTER);
         topPanel.setLayout(null);
 
-        // Panel superior con título y botón de retroceso
         JPanel panel = new JPanel();
         panel.setBounds(134, 0, 908, 61);
         panel.setBackground(new Color(162, 117, 102));
@@ -61,7 +60,6 @@ public class VerCoches extends JFrame {
         backBtn.setBounds(5, 5, 89, 31);
         panel.add(backBtn);
 
-        // Panel lateral con botones
         JPanel panel_1 = new JPanel();
         panel_1.setBounds(-7, 111, 120, 651);
         panel_1.setBackground(new Color(162, 117, 102));
@@ -91,7 +89,6 @@ public class VerCoches extends JFrame {
         
         ImageIcon original5 = new ImageIcon("Imagen/añadirMecanico.png");
         Image scaledImage5 = original5.getImage().getScaledInstance(50,-1,java.awt.Image.SCALE_DEFAULT);
-        //ImageIcon iconoEscala = new ImageIcon(original6.getImage().getScaledInstance(5, 5, java.awt.Image.SCALE_DEFAULT));
 
        ImageIcon scaledIcon5= new ImageIcon(scaledImage5);
         
@@ -116,7 +113,6 @@ public class VerCoches extends JFrame {
        
        ImageIcon original6 = new ImageIcon("Imagen/Facturaas.png");
        Image scaledImage = original6.getImage().getScaledInstance(50,-1,java.awt.Image.SCALE_DEFAULT);
-       //ImageIcon iconoEscala = new ImageIcon(original6.getImage().getScaledInstance(5, 5, java.awt.Image.SCALE_DEFAULT));
 
       ImageIcon scaledIcon= new ImageIcon(scaledImage);
        
@@ -137,7 +133,6 @@ public class VerCoches extends JFrame {
        
        ImageIcon original0 = new ImageIcon("Imagen/almacen.png");
        Image scaledImage0 = original0.getImage().getScaledInstance(50,-1,java.awt.Image.SCALE_DEFAULT);
-       //ImageIcon iconoEscala = new ImageIcon(original6.getImage().getScaledInstance(5, 5, java.awt.Image.SCALE_DEFAULT));
 
       ImageIcon scaledIcon0= new ImageIcon(scaledImage0);
        
@@ -146,6 +141,9 @@ public class VerCoches extends JFrame {
        
        bt5.addActionListener(new ActionListener() {
        	public void actionPerformed(ActionEvent e) {
+       		Stock frame = new Stock();
+            frame.setVisible(true);
+            dispose();
        	}
        });
        bt5.setForeground(new Color(162, 117, 102));
@@ -153,34 +151,30 @@ public class VerCoches extends JFrame {
        bt5.setBounds(26, 164, 53, 55);
        panel_1.add(bt5);
 
-        // Crear la lista de coches
         model = new DefaultListModel<>();
         listCoches = new JList<>(model);
         JScrollPane scrollPane = new JScrollPane(listCoches);
         scrollPane.setBounds(134, 72, 908, 500);
         topPanel.add(scrollPane);
 
-        // Botón para cargar los coches desde la base de datos
         JButton btnCargarCoches = new JButton("Cargar Coches");
         btnCargarCoches.setBounds(134, 580, 150, 30);
         btnCargarCoches.addActionListener(e -> cargarCoches());
         topPanel.add(btnCargarCoches);
     }
 
-    // Método para conectar a la base de datos
     private Connection conectarDB() {
         ConectarDB_mysql conector = new ConectarDB_mysql();
         return conector.conectar();
     }
 
-    // Método para cargar los coches desde la base de datos
     private void cargarCoches() {
         try (Connection con = conectarDB()) {
             String query = "SELECT Matricula, Marca, Modelo FROM vehiculo";
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
 
-            model.clear(); // Limpiar el modelo antes de agregar los nuevos coches
+            model.clear();
 
             while (rs.next()) {
                 String matricula = rs.getString("Matricula");
@@ -193,7 +187,6 @@ public class VerCoches extends JFrame {
         }
     }
 
-    // Método para abrir el formulario para añadir un coche
     private void abrirFormularioAñadir() {
         JPanel addPanel = new JPanel();
         addPanel.setLayout(new GridLayout(5, 2));
@@ -214,7 +207,6 @@ public class VerCoches extends JFrame {
 
         JButton btnGuardar = new JButton("Guardar");
         btnGuardar.addActionListener(e -> {
-            // Lógica para guardar el coche en la base de datos
             guardarCoche(matriculaField.getText(), marcaField.getText(), modeloField.getText(), añoField.getText());
         });
         addPanel.add(btnGuardar);
@@ -222,95 +214,73 @@ public class VerCoches extends JFrame {
         JOptionPane.showOptionDialog(this, addPanel, "Añadir Coche", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, null, null);
     }
 
-    // Método para guardar un coche en la base de datos
- // Método para guardar un coche en la base de datos
     private void guardarCoche(String matricula, String marca, String modelo, String año) {
         try (Connection con = conectarDB()) {
-            // Iniciar transacción para asegurar que ambas inserciones se hagan de forma atómica
             con.setAutoCommit(false);
 
             try {
-                // Primero, insertamos un registro en la tabla 'reparacion'
                 String queryReparacion = "INSERT INTO reparacion (factura_id_factura) VALUES (?)";
                 PreparedStatement stmtReparacion = con.prepareStatement(queryReparacion, Statement.RETURN_GENERATED_KEYS);
-                stmtReparacion.setInt(1, 1); // Usamos un valor de ejemplo para 'factura_id_factura'
+                stmtReparacion.setInt(1, 1);
                 stmtReparacion.executeUpdate();
 
-                // Obtener el ID de la reparación recién insertada
                 ResultSet generatedKeys = stmtReparacion.getGeneratedKeys();
                 int idReparacion = 0;
                 if (generatedKeys.next()) {
-                    idReparacion = generatedKeys.getInt(1); // ID generado de la reparación
+                    idReparacion = generatedKeys.getInt(1);
                 }
 
-                // Ahora insertamos el coche en la tabla 'vehiculo', utilizando el idReparacion
                 String queryVehiculo = "INSERT INTO vehiculo (Matricula, Marca, Modelo, Año_fabricacion, reparacion_id_reparacion, reparacion_factura_id_factura) VALUES (?, ?, ?, ?, ?, ?)";
                 PreparedStatement stmtVehiculo = con.prepareStatement(queryVehiculo);
-                stmtVehiculo.setString(1, matricula); // Matrícula
-                stmtVehiculo.setString(2, marca);     // Marca
-                stmtVehiculo.setString(3, modelo);    // Modelo
-                stmtVehiculo.setInt(4, Integer.parseInt(año));  // Año de fabricación
-                stmtVehiculo.setInt(5, idReparacion); // Referencia a la reparación
-                stmtVehiculo.setInt(6, 1); // ID de la factura, ejemplo: 1
+                stmtVehiculo.setString(1, matricula);
+                stmtVehiculo.setString(2, marca);
+                stmtVehiculo.setString(3, modelo);
+                stmtVehiculo.setInt(4, Integer.parseInt(año));
+                stmtVehiculo.setInt(5, idReparacion);
+                stmtVehiculo.setInt(6, 1);
 
-                // Ejecutamos la consulta de inserción del coche
                 int rowsAffected = stmtVehiculo.executeUpdate();
                 
                 if (rowsAffected > 0) {
-                    // Confirmamos la transacción
                     con.commit();
                     JOptionPane.showMessageDialog(this, "Coche añadido correctamente.");
-                    cargarCoches(); // Recargamos la lista de coches
+                    cargarCoches();
                 } else {
-                    // En caso de que no se haya insertado el coche, revertimos la transacción
                     con.rollback();
                     JOptionPane.showMessageDialog(this, "Error al añadir coche.");
                 }
             } catch (SQLException e) {
-                // Si hay algún error en cualquiera de las inserciones, revertimos la transacción
                 con.rollback();
                 JOptionPane.showMessageDialog(this, "Error al añadir coche: " + e.getMessage());
                 e.printStackTrace();
             } finally {
-                // Restauramos el autocommit para futuras operaciones
                 con.setAutoCommit(true);
             }
         } catch (SQLException e) {
-            e.printStackTrace(); // En caso de error con la conexión
+            e.printStackTrace();
         }
     }
 
-
-
-
-
-    // Método para modificar un coche seleccionado
- // Método para modificar un coche seleccionado
     private void modificarCoche() {
         String selectedCar = listCoches.getSelectedValue();
         if (selectedCar != null) {
-            String matricula = selectedCar.split(" - ")[0]; // Obtenemos la matrícula del coche seleccionado
-            
-            // Crear y mostrar la ventana de modificación
+            String matricula = selectedCar.split(" - ")[0];
+
             abrirFormularioModificar(matricula);
         } else {
             JOptionPane.showMessageDialog(this, "Por favor, seleccione un coche.");
         }
     }
 
-    // Método para abrir el formulario de modificación con los datos del coche
     private void abrirFormularioModificar(String matricula) {
-        // Crear el panel para el formulario de modificación
         JPanel modifyPanel = new JPanel();
         modifyPanel.setLayout(new GridLayout(5, 2));
 
-        // Campos de texto para editar los detalles del coche
         JTextField matriculaField = new JTextField();
         JTextField marcaField = new JTextField();
         JTextField modeloField = new JTextField();
         JTextField añoField = new JTextField();
 
-        // Obtener los detalles del coche de la base de datos
         try (Connection con = conectarDB()) {
             String query = "SELECT Marca, Modelo, Año_fabricacion FROM vehiculo WHERE Matricula = ?";
             PreparedStatement stmt = con.prepareStatement(query);
@@ -318,7 +288,6 @@ public class VerCoches extends JFrame {
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
-                // Rellenar los campos con los valores actuales del coche
                 marcaField.setText(rs.getString("Marca"));
                 modeloField.setText(rs.getString("Modelo"));
                 añoField.setText(rs.getString("Año_fabricacion"));
@@ -327,7 +296,6 @@ public class VerCoches extends JFrame {
             e.printStackTrace();
         }
 
-        // Agregar los campos al panel
         modifyPanel.add(new JLabel("Matrícula:"));
         modifyPanel.add(matriculaField);
         modifyPanel.add(new JLabel("Marca:"));
@@ -337,37 +305,31 @@ public class VerCoches extends JFrame {
         modifyPanel.add(new JLabel("Año de fabricación:"));
         modifyPanel.add(añoField);
 
-        // Botón para guardar los cambios
         JButton btnGuardar = new JButton("Guardar");
         btnGuardar.addActionListener(e -> {
-            // Lógica para actualizar el coche en la base de datos
             actualizarCoche(matricula, matriculaField.getText(), marcaField.getText(), modeloField.getText(), añoField.getText());
         });
         modifyPanel.add(btnGuardar);
 
-        // Mostrar el formulario en una ventana emergente
         JOptionPane.showOptionDialog(this, modifyPanel, "Modificar Coche", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, null, null);
     }
 
-    // Método para actualizar los detalles del coche en la base de datos
     private void actualizarCoche(String matriculaOriginal, String matricula, String marca, String modelo, String año) {
         try (Connection con = conectarDB()) {
             String query = "UPDATE vehiculo SET Matricula = ?, Marca = ?, Modelo = ?, Año_fabricacion = ? WHERE Matricula = ?";
             PreparedStatement stmt = con.prepareStatement(query);
 
-            // Asignamos los nuevos valores
             stmt.setString(1, matricula);
             stmt.setString(2, marca);
             stmt.setString(3, modelo);
             stmt.setInt(4, Integer.parseInt(año));
-            stmt.setString(5, matriculaOriginal); // Matricula original para identificar el coche
+            stmt.setString(5, matriculaOriginal);
 
-            // Ejecutar la actualización
             int rowsAffected = stmt.executeUpdate();
 
             if (rowsAffected > 0) {
                 JOptionPane.showMessageDialog(this, "Coche modificado correctamente.");
-                cargarCoches(); // Recargar la lista de coches
+                cargarCoches();
             } else {
                 JOptionPane.showMessageDialog(this, "Error al modificar el coche.");
             }
@@ -376,8 +338,6 @@ public class VerCoches extends JFrame {
         }
     }
 
-
-    // Método para eliminar un coche seleccionado
     private void eliminarCoche() {
         String selectedCar = listCoches.getSelectedValue();
         if (selectedCar != null) {
@@ -389,7 +349,7 @@ public class VerCoches extends JFrame {
                 int rowsAffected = stmt.executeUpdate();
                 if (rowsAffected > 0) {
                     JOptionPane.showMessageDialog(this, "Coche eliminado.");
-                    cargarCoches(); // Recargar la lista de coches
+                    cargarCoches();
                 } else {
                     JOptionPane.showMessageDialog(this, "Error al eliminar coche.");
                 }
