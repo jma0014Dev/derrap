@@ -93,8 +93,25 @@ public class Mecanico extends JFrame {
         btnAgregarCoche.setBounds(26, 195, 57, 57);
         lateralPanel.add(btnAgregarCoche);
 
-        JButton btnAlmacen = new JButton("Almacén");
-        btnAlmacen.setBounds(26, 127, 57, 57);
+        ImageIcon original0 = new ImageIcon("Imagen/almacen.png");
+        Image scaledImage0 = original0.getImage().getScaledInstance(50,-1,java.awt.Image.SCALE_DEFAULT);
+        //ImageIcon iconoEscala = new ImageIcon(original6.getImage().getScaledInstance(5, 5, java.awt.Image.SCALE_DEFAULT));
+
+       ImageIcon scaledIcon0= new ImageIcon(scaledImage0);
+        
+        JButton btnAlmacen = new JButton("");
+        btnAlmacen.setIcon(scaledIcon0);
+        
+        btnAlmacen.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		Stock frame = new Stock();
+                frame.setVisible(true);
+                dispose();
+        	}
+        });
+        btnAlmacen.setForeground(new Color(255, 255, 255));
+        btnAlmacen.setBackground(new Color(162, 117, 104));
+        btnAlmacen.setBounds(26, 159, 53, 55);
         lateralPanel.add(btnAlmacen);
 
         // Otros elementos gráficos (imágenes y botones, sin funcionalidad crítica)
