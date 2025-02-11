@@ -97,6 +97,7 @@ public class VerCoches extends JFrame {
 
        btn5.addActionListener(new ActionListener() {
            public void actionPerformed(ActionEvent e) {
+               
                AñadirMecanico frame = new AñadirMecanico();
                frame.setVisible(true);
                dispose();
@@ -156,7 +157,10 @@ public class VerCoches extends JFrame {
         scrollPane.setBounds(134, 72, 908, 500);
         topPanel.add(scrollPane);
 
-        cargarCoches();
+        JButton btnCargarCoches = new JButton("Cargar Coches");
+        btnCargarCoches.setBounds(134, 580, 150, 30);
+        btnCargarCoches.addActionListener(e -> cargarCoches());
+        topPanel.add(btnCargarCoches);
     }
 
     private Connection conectarDB() {
