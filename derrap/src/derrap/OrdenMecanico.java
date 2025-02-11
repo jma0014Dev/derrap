@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.Color;
@@ -84,16 +85,12 @@ public class OrdenMecanico extends JFrame {
         panel_1.setLayout(null);
         
         JButton btn5 = new JButton("Facturas");
-        btn5.setBounds(26, 53, 57, 57);
+        btn5.setBounds(26, 38, 57, 57);
         btn5.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             }
         });
         panel_1.add(btn5);
-        
-        JButton btn6 = new JButton("Almacen");
-        btn6.setBounds(26, 127, 57, 57);
-        panel_1.add(btn6);
         
         JLabel lblNewLabel_5 = new JLabel("");
         lblNewLabel_5.setIcon(new ImageIcon("Imagen/añadir.png"));
@@ -105,10 +102,26 @@ public class OrdenMecanico extends JFrame {
         lblNewLabel_6.setBounds(33, 127, 64, 35);
         panel_1.add(lblNewLabel_6);
         
-        JLabel lblNewLabel_7 = new JLabel("");
-        lblNewLabel_7.setIcon(new ImageIcon("Imagen/almacen.png"));
-        lblNewLabel_7.setBounds(24, 207, 46, 41);
-        panel_1.add(lblNewLabel_7);
+        ImageIcon original0 = new ImageIcon("Imagen/almacen.png");
+        Image scaledImage0 = original0.getImage().getScaledInstance(50,-1,java.awt.Image.SCALE_DEFAULT);
+        //ImageIcon iconoEscala = new ImageIcon(original6.getImage().getScaledInstance(5, 5, java.awt.Image.SCALE_DEFAULT));
+
+       ImageIcon scaledIcon0= new ImageIcon(scaledImage0);
+        
+        JButton bt5 = new JButton("");
+        bt5.setIcon(scaledIcon0);
+        
+        bt5.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		Stock frame = new Stock();
+                frame.setVisible(true);
+                dispose();
+        	}
+        });
+        bt5.setForeground(new Color(255, 255, 255));
+        bt5.setBackground(new Color(162, 117, 104));
+        bt5.setBounds(26, 126, 53, 55);
+        panel_1.add(bt5);
         
         JLabel lblNewLabel_8 = new JLabel("");
         lblNewLabel_8.setBounds(-17, -13, 164, 124);
