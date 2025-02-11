@@ -6,7 +6,6 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
-import java.awt.LinearGradientPaint;
 
 public class Clientes extends JFrame {
 
@@ -57,30 +56,24 @@ public class Clientes extends JFrame {
     }
 
     public Clientes() {
-        // Se reduce el tamaño de la ventana a 1366x768
+        
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setBounds(100, 100, 1366, 768);
-        // Content pane con layout absoluto
+       
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         contentPane.setLayout(null);
         setContentPane(contentPane);
         
-        // Conectar a la base de datos
         conectarBaseDatos();
         
-        // ===============================
-        // Logo de la Empresa (Esquina Superior Izquierda)
-        // ===============================
+       
         JLabel logoEmpresa = new JLabel("");
         logoEmpresa.setIcon(new ImageIcon("Imagen/logo.png"));
         logoEmpresa.setBounds(0, 0, 134, 103);
         contentPane.add(logoEmpresa);
 
-        // ===============================
-        // Panel Superior (Barra Superior) con degradado
-        // ===============================
-        // Usamos el GradientPanel en lugar de un JPanel normal
+        
         JPanel barraSuperior = new GradientPanel(
                 new Color[]{ new Color(120, 80, 60), new Color(180, 150, 130), new Color(120, 80, 60) },
                 new float[]{ 0f, 0.5f, 1f }
@@ -97,16 +90,26 @@ public class Clientes extends JFrame {
         JButton btnVolver = new JButton("<--");
         btnVolver.setBounds(5, 5, 63, 23);
         btnVolver.addActionListener(e -> {
-            // Se asume que tienes la ventana Administrador implementada
+          
             Administrador administradorFrame = new Administrador();
             administradorFrame.setVisible(true);
             dispose();
         });
         barraSuperior.add(btnVolver);
 
-        // ===============================
-        // Panel Lateral (Barra Lateral) con degradado
-        // ===============================
+        JPanel topPanel = new JPanel();
+        topPanel.setBackground(Color.WHITE);
+        contentPane.add(topPanel, BorderLayout.CENTER);
+        topPanel.setLayout(null);
+        
+        
+        JPanel panel_1 = new JPanel();
+        panel_1.setForeground(new Color(162, 117, 102));
+        panel_1.setBounds(-7, 111, 99, 651);
+        panel_1.setBackground(new Color(162, 117, 102));
+        topPanel.add(panel_1);
+        panel_1.setLayout(null);
+
         JPanel barraLateral = new GradientPanel(
                 new Color[]{ new Color(120, 80, 60), new Color(180, 150, 130), new Color(120, 80, 60) },
                 new float[]{ 0f, 0.5f, 1f }
@@ -115,7 +118,30 @@ public class Clientes extends JFrame {
         barraLateral.setBounds(-5, 103, 98, 631);
         contentPane.add(barraLateral);
 
-        // Botón "Añadir Cliente" con imagen (se reescala la imagen al tamaño del botón)
+
+        
+        ImageIcon original6 = new ImageIcon("Imagen/Facturaas.png");
+        Image scaledImage = original6.getImage().getScaledInstance(50,-1,java.awt.Image.SCALE_DEFAULT);
+       
+
+       ImageIcon scaledIcon= new ImageIcon(scaledImage);
+        
+        JButton btn6 = new JButton("");
+        btn6.setIcon(scaledIcon);
+        
+        btn6.addActionListener(new ActionListener() {
+        	 public void actionPerformed(ActionEvent e) {
+                                  Ordenes frame = new Ordenes();
+                 frame.setVisible(true);
+                 dispose();
+             }
+         });
+        btn6.setForeground(new Color(255, 255, 255));
+        btn6.setBackground(new Color(162, 117, 104));
+        btn6.setBounds(26, 88, 53, 55);
+        panel_1.add(btn6);
+        
+        
         JButton btnAñadirCliente = new JButton("");
         btnAñadirCliente.setBounds(20, 11, 60, 50);
         ImageIcon originalIcon = new ImageIcon("Imagen\\agregar-usuario.png");
@@ -127,7 +153,7 @@ public class Clientes extends JFrame {
         });
         barraLateral.add(btnAñadirCliente);
 
-        // Otros íconos en el panel lateral (puedes ajustar si lo deseas)
+        
         JLabel iconoUsuario = new JLabel("");
         iconoUsuario.setIcon(new ImageIcon("Imagen/añadir.png"));
         iconoUsuario.setBounds(10, 10, 50, 50);
@@ -138,18 +164,57 @@ public class Clientes extends JFrame {
         iconoFactura.setBounds(10, 70, 50, 35);
         barraLateral.add(iconoFactura);
 
-        // ===============================
-        // Panel Principal: Tabla y Botones
-        // ===============================
+        
+        ImageIcon original5 = new ImageIcon("Imagen/añadirMecanico.png");
+        Image scaledImage5 = original5.getImage().getScaledInstance(50,-1,java.awt.Image.SCALE_DEFAULT);
+        //ImageIcon iconoEscala = new ImageIcon(original6.getImage().getScaledInstance(5, 5, java.awt.Image.SCALE_DEFAULT));
+
+       ImageIcon scaledIcon5= new ImageIcon(scaledImage5);
+        
+       JButton btn5 = new JButton("");
+       btn5.setIcon(scaledIcon5);
+
+       btn5.addActionListener(new ActionListener() {
+           public void actionPerformed(ActionEvent e) {
+               
+               AñadirMecanico frame = new AñadirMecanico();
+               frame.setVisible(true);
+               dispose();
+           }
+       });
+       btn5.setForeground(new Color(255, 255, 255));
+       btn5.setBackground(new Color(162, 117, 104));
+       btn5.setBounds(26, 11, 53, 55);
+       panel_1.add(btn5);
+
+        ImageIcon original0 = new ImageIcon("Imagen/almacen.png");
+        Image scaledImage0 = original0.getImage().getScaledInstance(50,-1,java.awt.Image.SCALE_DEFAULT);
+        
+
+       ImageIcon scaledIcon0= new ImageIcon(scaledImage0);
+        
+        JButton bt5 = new JButton("");
+        bt5.setIcon(scaledIcon0);
+        
+        bt5.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		Stock frame = new Stock();
+                frame.setVisible(true);
+                dispose();
+        	}
+        });
+        bt5.setForeground(new Color(255, 255, 255));
+        bt5.setBackground(new Color(162, 117, 104));
+        bt5.setBounds(26, 159, 53, 55);
+        panel_1.add(bt5);
+        
+        
         JPanel panelClientes = new JPanel();
         panelClientes.setLayout(null);
         panelClientes.setBounds(160, 79, 1067, 569);
         contentPane.add(panelClientes);
         
 
-
-        
-        // Configuración del modelo y JTable
         modelClientes = new DefaultTableModel();
         modelClientes.addColumn("DNI");
         modelClientes.addColumn("Nombre");
@@ -162,29 +227,26 @@ public class Clientes extends JFrame {
         tableClientes = new JTable(modelClientes);
         tableClientes.setFillsViewportHeight(true);
 
-        // JScrollPane para la tabla
+
         JScrollPane scrollPane = new JScrollPane(tableClientes);
         scrollPane.setBounds(29, 31, 1067, 497);
         panelClientes.add(scrollPane);
 
-        // Panel inferior para los botones
         JPanel panelBotones = new JPanel();
         panelBotones.setLayout(null);
         panelBotones.setBounds(29, 528, 1067, 64);
         panelClientes.add(panelBotones);
         
-     // Botón "Asignar Vehículo"
         JButton btnAsignarVehiculo = new JButton("Asignar Vehículo");
-        btnAsignarVehiculo.setBounds(760, 11, 120, 28);  // Ajusta la posición y tamaño según tu layout
+        btnAsignarVehiculo.setBounds(760, 11, 120, 28);  
         btnAsignarVehiculo.addActionListener(e -> {
             int selectedRow = tableClientes.getSelectedRow();
             if (selectedRow != -1) {
-                // Se obtienen los datos mínimos del cliente seleccionado:
+         
                 int dni = Integer.parseInt(modelClientes.getValueAt(selectedRow, 0).toString());
                 String nombre = modelClientes.getValueAt(selectedRow, 1).toString();
                 String apellido = modelClientes.getValueAt(selectedRow, 2).toString();
                 int currentMatricula = Integer.parseInt(modelClientes.getValueAt(selectedRow, 6).toString());
-                // Se crea un objeto ClienteData para pasar los datos a la ventana de asignación
                 ClienteData cliente = new ClienteData(dni, nombre, apellido, currentMatricula);
                 new AsignarVehiculoFrame(cliente, connection).setVisible(true);
             } else {
@@ -194,13 +256,11 @@ public class Clientes extends JFrame {
         panelBotones.add(btnAsignarVehiculo);
 
         
-        // Botón "Actualizar Tabla"
         JButton btnActualizarTabla = new JButton("Actualizar Tabla");
         btnActualizarTabla.setBounds(323, 11, 107, 28);
         btnActualizarTabla.addActionListener(e -> loadClientData());
         panelBotones.add(btnActualizarTabla);
 
-        // Botón "Modificar Cliente"
         JButton btnModificarCliente = new JButton("Modificar Cliente");
         btnModificarCliente.setBounds(465, 11, 107, 28);
         btnModificarCliente.addActionListener(e -> {
@@ -218,7 +278,6 @@ public class Clientes extends JFrame {
         });
         panelBotones.add(btnModificarCliente);
 
-        // Botón "Eliminar Cliente"
         JButton btnEliminarCliente = new JButton("Eliminar Cliente");
         btnEliminarCliente.setBounds(608, 11, 107, 28);
         btnEliminarCliente.addActionListener(e -> {
@@ -246,8 +305,8 @@ public class Clientes extends JFrame {
         });
         panelBotones.add(btnEliminarCliente);
 
-        // Cargar los datos iniciales de la tabla
         loadClientData();
+        setLocationRelativeTo(null);
     }
 
     private void conectarBaseDatos() {
@@ -287,7 +346,6 @@ public class Clientes extends JFrame {
         }
     }
 
-    // Clase interna para representar los datos mínimos de un cliente
     public class ClienteData {
         int dni;
         String nombre;

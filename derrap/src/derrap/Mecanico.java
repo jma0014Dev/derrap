@@ -1,18 +1,18 @@
 package derrap;
 
-import java.awt.EventQueue;
 import java.awt.BorderLayout;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
+import java.awt.Color;
+import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.Color;
-import javax.swing.JComboBox;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
 public class Mecanico extends JFrame {
 
@@ -45,102 +45,100 @@ public class Mecanico extends JFrame {
 
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-        setContentPane(contentPane);
         contentPane.setLayout(new BorderLayout());
+        setContentPane(contentPane);
 
-        // Etiqueta en la parte superior
+        // Panel superior que contiene el encabezado y el botón "<--"
         JPanel topPanel = new JPanel();
         topPanel.setBackground(Color.WHITE);
-        contentPane.add(topPanel, BorderLayout.CENTER);
         topPanel.setLayout(null);
-        
-        JPanel panel = new JPanel();
-        panel.setBounds(142, 0, 900, 61);
-        panel.setBackground(new Color(162, 117, 102));
-        topPanel.add(panel);
-        panel.setLayout(null);
-        
-        JLabel lblNewLabel = new JLabel("Menu Principal Mecánico ");
-        lblNewLabel.setBounds(8, 35, 300, 20);
-        panel.add(lblNewLabel);
-        lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
-        
-        // Botón para regresar al Login
+        contentPane.add(topPanel, BorderLayout.CENTER);
+
+        JPanel headerPanel = new JPanel();
+        headerPanel.setBounds(142, 0, 900, 61);
+        headerPanel.setBackground(new Color(162, 117, 102));
+        headerPanel.setLayout(null);
+        topPanel.add(headerPanel);
+
+        JLabel lblTitulo = new JLabel("Menu Principal Mecánico");
+        lblTitulo.setFont(new Font("Tahoma", Font.PLAIN, 16));
+        lblTitulo.setBounds(8, 35, 300, 20);
+        headerPanel.add(lblTitulo);
+
+        // Botón "<--" para volver al login
         JButton atrasButton = new JButton("<--");
+        atrasButton.setBounds(5, 5, 63, 23);
         atrasButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 principal loginFrame = new principal();
                 loginFrame.setVisible(true);
-                dispose(); // Cierra el frame actual
+                dispose();
             }
         });
-        atrasButton.setBounds(5, 5, 63, 23);
-        panel.add(atrasButton);
-        
-        JPanel panel_1 = new JPanel();
-        panel_1.setForeground(new Color(162, 117, 102));
-        panel_1.setBounds(-7, 111, 99, 651);
-        panel_1.setBackground(new Color(162, 117, 102));
-        topPanel.add(panel_1);
-        panel_1.setLayout(null);
-        
-        JButton facturasButton = new JButton("Facturas");
-        facturasButton.setBounds(26, 53, 57, 57);
-        facturasButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // Acción del botón facturas
-            }
-        });
-        panel_1.add(facturasButton);
-        
-        JButton agregarCocheButton = new JButton("Agregar Coche");
-        agregarCocheButton.setBounds(26, 195, 57, 57);
-        panel_1.add(agregarCocheButton);
-        agregarCocheButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+        headerPanel.add(atrasButton);
 
-            }
+        // Panel lateral (se muestran los elementos, pero sin funcionalidad activa)
+        JPanel lateralPanel = new JPanel();
+        lateralPanel.setBounds(-7, 111, 99, 651);
+        lateralPanel.setBackground(new Color(162, 117, 102));
+        lateralPanel.setLayout(null);
+        topPanel.add(lateralPanel);
+
+        // Ejemplo de botón en lateral (sin acción activa)
+        JButton btnFacturas = new JButton("Facturas");
+        btnFacturas.setBounds(26, 53, 57, 57);
+        lateralPanel.add(btnFacturas);
+
+        JButton btnAgregarCoche = new JButton("Agregar Coche");
+        btnAgregarCoche.setBounds(26, 195, 57, 57);
+        lateralPanel.add(btnAgregarCoche);
+
+        ImageIcon original0 = new ImageIcon("Imagen/almacen.png");
+        Image scaledImage0 = original0.getImage().getScaledInstance(50,-1,java.awt.Image.SCALE_DEFAULT);
+        //ImageIcon iconoEscala = new ImageIcon(original6.getImage().getScaledInstance(5, 5, java.awt.Image.SCALE_DEFAULT));
+
+       ImageIcon scaledIcon0= new ImageIcon(scaledImage0);
+        
+        JButton btnAlmacen = new JButton("");
+        btnAlmacen.setIcon(scaledIcon0);
+        
+        btnAlmacen.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		Stock frame = new Stock();
+                frame.setVisible(true);
+                dispose();
+        	}
         });
-        
-        JButton almacenButton = new JButton("Almacén");
-        almacenButton.setBounds(26, 127, 57, 57);
-        panel_1.add(almacenButton);
-        
-        JButton verCocheButton = new JButton("Ver coches en taller");
-        verCocheButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                VerCoches VerCoches2 = new VerCoches();
-                VerCoches2.setVisible(true);
-            }
-        });
-        verCocheButton.setBounds(142, 243, 194, 34);
-        topPanel.add(verCocheButton);
-        
-        JButton verOrdenButton = new JButton("Ver órdenes asignadas");
-        verOrdenButton.setBounds(416, 243, 194, 34);
-        topPanel.add(verOrdenButton);
-        
-        JLabel lblNewLabel_1 = new JLabel("New label");
-        lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\MEDAC\\Desktop\\derrap\\src\\imagen\\coche.png"));
-        lblNewLabel_1.setBounds(142, 98, 194, 134);
-        topPanel.add(lblNewLabel_1);
-        
-        JLabel lblNewLabel_2 = new JLabel("New label");
-        lblNewLabel_2.setIcon(new ImageIcon("C:\\Users\\MEDAC\\Desktop\\derrap\\src\\imagen\\historial.png"));
-        lblNewLabel_2.setBounds(416, 89, 194, 143);
-        topPanel.add(lblNewLabel_2);
-        
-        JLabel lblNewLabel_3 = new JLabel("New label");
-        lblNewLabel_3.setIcon(new ImageIcon("C:\\Users\\MEDAC\\Desktop\\derrap\\src\\imagen\\logo.png"));
-        lblNewLabel_3.setBounds(0, 0, 143, 112);
-        topPanel.add(lblNewLabel_3);
-        verOrdenButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                OrdenMecanico ordenMecanico = new OrdenMecanico();
-                ordenMecanico.setVisible(true);
-            }
-        });
+        btnAlmacen.setForeground(new Color(255, 255, 255));
+        btnAlmacen.setBackground(new Color(162, 117, 104));
+        btnAlmacen.setBounds(26, 159, 53, 55);
+        lateralPanel.add(btnAlmacen);
+
+        // Otros elementos gráficos (imágenes y botones, sin funcionalidad crítica)
+        JButton btnVerCoches = new JButton("Ver coches en taller");
+        btnVerCoches.setBounds(142, 243, 194, 34);
+        topPanel.add(btnVerCoches);
+
+        JButton btnVerOrdenes = new JButton("Ver órdenes asignadas");
+        btnVerOrdenes.setBounds(416, 243, 194, 34);
+        topPanel.add(btnVerOrdenes);
+
+        JLabel lblCoche = new JLabel("");
+        lblCoche.setIcon(new ImageIcon("C:\\Users\\MEDAC\\Desktop\\derrap\\src\\imagen\\coche.png"));
+        lblCoche.setBounds(142, 98, 194, 134);
+        topPanel.add(lblCoche);
+
+        JLabel lblHistorial = new JLabel("");
+        lblHistorial.setIcon(new ImageIcon("C:\\Users\\MEDAC\\Desktop\\derrap\\src\\imagen\\historial.png"));
+        lblHistorial.setBounds(416, 89, 194, 143);
+        topPanel.add(lblHistorial);
+
+        JLabel lblLogo = new JLabel("");
+        lblLogo.setIcon(new ImageIcon("C:\\Users\\MEDAC\\Desktop\\derrap\\src\\imagen\\logo.png"));
+        lblLogo.setBounds(0, 0, 143, 112);
+        topPanel.add(lblLogo);
     }
 }
+
 
 

@@ -41,7 +41,7 @@ public class OrdenMecanico extends JFrame {
      */
     public OrdenMecanico() {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setSize(1920, 1080);
+        setSize(1062, 801);
         setLocationRelativeTo(null);
 
         contentPane = new JPanel();
@@ -83,10 +83,6 @@ public class OrdenMecanico extends JFrame {
         topPanel.add(panel_1);
         panel_1.setLayout(null);
         
-        JComboBox comboBox = new JComboBox();
-        comboBox.setBounds(26, 5, 30, 22);
-        panel_1.add(comboBox);
-        
         JButton btn5 = new JButton("Facturas");
         btn5.setBounds(26, 53, 57, 57);
         btn5.addActionListener(new ActionListener() {
@@ -94,10 +90,6 @@ public class OrdenMecanico extends JFrame {
             }
         });
         panel_1.add(btn5);
-        
-        JButton bt5 = new JButton("Agregar Coche");
-        bt5.setBounds(26, 195, 57, 57);
-        panel_1.add(bt5);
         
         JButton btn6 = new JButton("Almacen");
         btn6.setBounds(26, 127, 57, 57);
