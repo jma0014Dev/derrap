@@ -67,6 +67,7 @@ public class Mecanico extends JFrame {
 
         // Botón "<--" para volver al login
         JButton atrasButton = new JButton("<--");
+        atrasButton.setBackground(new Color(162, 117, 104));
         atrasButton.setBounds(5, 5, 63, 23);
         atrasButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -85,14 +86,28 @@ public class Mecanico extends JFrame {
         topPanel.add(lateralPanel);
 
         // Ejemplo de botón en lateral (sin acción activa)
-        JButton btnFacturas = new JButton("Facturas");
-        btnFacturas.setBounds(26, 53, 57, 57);
-        lateralPanel.add(btnFacturas);
+        ImageIcon original6 = new ImageIcon("Imagen/Facturaas.png");
+        Image scaledImage = original6.getImage().getScaledInstance(50,-1,java.awt.Image.SCALE_DEFAULT);
+        //ImageIcon iconoEscala = new ImageIcon(original6.getImage().getScaledInstance(5, 5, java.awt.Image.SCALE_DEFAULT));
 
-        JButton btnAgregarCoche = new JButton("Agregar Coche");
-        btnAgregarCoche.setBounds(26, 195, 57, 57);
-        lateralPanel.add(btnAgregarCoche);
-
+       ImageIcon scaledIcon= new ImageIcon(scaledImage);
+        
+        JButton btn6 = new JButton("");
+        btn6.setIcon(scaledIcon);
+        
+        btn6.addActionListener(new ActionListener() {
+        	 public void actionPerformed(ActionEvent e) {
+                 // Crear una nueva instancia de Factura y hacerla visible
+                 Ordenes frame = new Ordenes();
+                 frame.setVisible(true);
+                 dispose();
+             }
+         });
+        btn6.setForeground(new Color(255, 255, 255));
+        btn6.setBackground(new Color(162, 117, 104));
+        btn6.setBounds(26, 88, 53, 55);
+        lateralPanel.add(btn6);
+//fotos cambiadas
         ImageIcon original0 = new ImageIcon("Imagen/almacen.png");
         Image scaledImage0 = original0.getImage().getScaledInstance(50,-1,java.awt.Image.SCALE_DEFAULT);
         //ImageIcon iconoEscala = new ImageIcon(original6.getImage().getScaledInstance(5, 5, java.awt.Image.SCALE_DEFAULT));
@@ -116,10 +131,18 @@ public class Mecanico extends JFrame {
 
         // Otros elementos gráficos (imágenes y botones, sin funcionalidad crítica)
         JButton btnVerCoches = new JButton("Ver coches en taller");
+        btnVerCoches.setForeground(new Color(255, 255, 255));
+        btnVerCoches.setBackground(new Color(162, 117, 104));
+        btnVerCoches.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        	}
+        });
         btnVerCoches.setBounds(142, 243, 194, 34);
         topPanel.add(btnVerCoches);
 
         JButton btnVerOrdenes = new JButton("Ver órdenes asignadas");
+        btnVerOrdenes.setForeground(new Color(255, 255, 255));
+        btnVerOrdenes.setBackground(new Color(162, 117, 104));
         btnVerOrdenes.setBounds(416, 243, 194, 34);
         topPanel.add(btnVerOrdenes);
 
